@@ -7,22 +7,28 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Guest.destroy_all
+Episode.destroy_all
 
 require 'csv'
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'daily_show_guests.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.first(100).each do |row|
+csv.first(100).each.with_index do |row, i|
+  e = Episode.create(date: row["Show"], number: i + 1)
   g = Guest.find_or_initialize_by(name: row['Raw_Guest_List'].split(',').first )
   g.occupation = row['GoogleKnowlege_Occupation']
   g.save
+  e.guests << g
+  g.episodes << e
 end
 
-date = Date.parse('2015-09-08')
+# date = Date.parse('2015-09-08')
+#
+# (1..40).each do |num|
+#   Episode.create(date: date, number: num)
+#   date = date.next
+# end
 
-(1..40).each do |num|
-  Episode.create(date: date, number: num)
-  date = date.next
-end
+
 
 User.create(username: 'stephencolbert', password: 'bears')
