@@ -1,0 +1,10 @@
+<p>Create New Appearance</p>
+<%= form_for @appearance do |f| %>
+  <%= f.label :guest, "Guest:" %>
+  <%= f.text_field :guest, value: @guest.name %>
+  <%= f.label :episode, "Episode Number" %>
+  <%= f.text_field :episode %>
+  <%= f.label :rating, "Rating (1-5)" %>
+  <%= f.text_field :rating %>
+  <%= f.submit %>
+<% end %>

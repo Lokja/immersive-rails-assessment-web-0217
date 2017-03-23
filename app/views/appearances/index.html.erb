@@ -1,0 +1,5 @@
+<% @appearances.each do |appearance| %>
+  <p><%= Guest.find(appearance.guest_id).name %></p>
+  <p><%= Episode.find(appearance.episode_id).date %></p>
+  <p><%= appearance.rating %></p>
+<% end %>

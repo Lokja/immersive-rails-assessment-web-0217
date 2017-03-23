@@ -3,3 +3,4 @@
 <% @guest.episodes.each do |episode| %>
   <%= link_to episode.date, episode_path(episode) %><br>
 <% end %>
+Create New Appearance: <%= link_to "Click", {controller: "appearances", action: "new", guest: @guest.name} %>
